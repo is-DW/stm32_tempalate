@@ -54,3 +54,12 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
+
+void EXTI4_IRQHandler(void)
+{     	
+  if(EXTI_GetITStatus(EXTI_Line4) != RESET)	  
+	{	  
+		GPIO_WriteBit(GPIOE, GPIO_Pin_5, (BitAction)(1-(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_5))));
+	}
+	EXTI_ClearITPendingBit(EXTI_Line4);  
+}
